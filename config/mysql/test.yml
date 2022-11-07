@@ -1,0 +1,35 @@
+mysql:
+  host: "${MYSQL_HOST}"
+  port: ${MYSQL_PORT}
+  username: "${MYSQL_USERNAME}"
+  password: "${MYSQL_PASSWORD}"
+  connection_timeout: 10
+  character_set: "UTF8"
+  number_of_tables_replicated_in_parallel: 1
+  source_name: "client-api"
+  server_id: 101
+  sources:
+    ${MYSQL_SCHEMA_NAME}:
+      - customer_customer:
+          initial_replication_where_condition:
+          ignore_columns:
+            - password
+
+singlestore:
+  host: "${SINGLESTORE_HOST}"
+  port: ${SINGLESTORE_PORT}
+  username: "${SINGLESTORE_USERNAME}"
+  password: "${SINGLESTORE_PASSWORD}"
+  target_schema_name: "${SINGLESTORE_TARGET_SCHEMA}"
+
+replication_information:
+  schema_name: "${REPLICATION_SCHEMA}"
+  positions_table_name: "${REPLICATION_TABLE}"
+
+sentry:
+  dsn: "${SENTRY_DSN}"
+  environment: "${SENTRY_ENVIRONMENT}"
+
+prometheus:
+  port: "${PROMETHEUS_PORT}"
+  namespace: "${PROMETHEUS_NAMESPACE}"
